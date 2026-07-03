@@ -143,6 +143,10 @@ public class Runner implements CommandLineRunner {
 
         System.out.println("Database popolato con successo.");
 
+        Prenotazione prenotazione = prenotazioneService.disponibilitaPrenotazione(utenteDue, postazioneCinque,LocalDate.of(1935, 2,3));
+        System.out.println(prenotazione);
+
+
         //METODI DISPONIBILI
 
         //EDIFICIO : SALVO - CERCO PER ID - CERCO TUTTI

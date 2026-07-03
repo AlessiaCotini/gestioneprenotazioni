@@ -29,10 +29,10 @@ public class PrenotazioneService {
         if (prenotazioneRepository.isUtenteOccupato(utente, data)) {
             throw new NotAvailabilityEx("L'utente ha già un'altra prenotazione per questa data.");
         }
-        Prenotazione prenotazione = new Prenotazione();
-        prenotazione.setData(data);
-        prenotazione.setPostazione(postazione);
-        prenotazione.setUtente(utente);
+        Prenotazione prenotazione = new Prenotazione(data, postazione, utente);
+//        prenotazione.setData(data);
+//        prenotazione.setPostazione(postazione);
+//        prenotazione.setUtente(utente);
 
         return prenotazioneRepository.save(prenotazione);
     }
