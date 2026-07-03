@@ -13,7 +13,7 @@ import java.util.UUID;
 @ToString
 public class Prenotazione {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.UUID)
     @Setter(AccessLevel.NONE)
     private UUID prenotazione_id;
 

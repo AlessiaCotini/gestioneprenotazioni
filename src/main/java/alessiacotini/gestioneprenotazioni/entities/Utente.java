@@ -12,6 +12,7 @@ import java.util.UUID;
 @ToString
 public class Utente {
     @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "utente_id")
     private UUID utente_id;
 

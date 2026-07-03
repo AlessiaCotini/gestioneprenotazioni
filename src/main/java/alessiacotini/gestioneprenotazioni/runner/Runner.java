@@ -36,18 +36,17 @@ public class Runner implements CommandLineRunner {
     public void run(String... args) throws Exception {
 
         //EDIFICI
-
         Edificio edificioUno = new Edificio("The Hub", "Via del Corso 88", "Roma");
         Edificio edificioDue = new Edificio("Milano Innovation District", "Via Cristina Belgioioso 171", "Milano");
         Edificio edificioTre = new Edificio("Torino Co-Working Space", "Corso Ferrucci 112", "Torino");
         Edificio edificioQuattro = new Edificio("Napoli Tech Hub", "Via Galileo Ferraris 40", "Napoli");
         Edificio edificioCinque = new Edificio("Bologna Business Center", "Via dell'Indipendenza 4", "Bologna");
 
-//        edificioService.save(edificioUno);
-//        edificioService.save(edificioDue);
-//        edificioService.save(edificioTre);
-//        edificioService.save(edificioQuattro);
-//        edificioService.save(edificioCinque);
+        edificioUno = edificioService.save(edificioUno);
+        edificioDue = edificioService.save(edificioDue);
+        edificioTre = edificioService.save(edificioTre);
+        edificioQuattro = edificioService.save(edificioQuattro);
+        edificioCinque = edificioService.save(edificioCinque);
 
 
         //UTENTI
@@ -57,78 +56,81 @@ public class Runner implements CommandLineRunner {
         Utente utenteQuattro = new Utente("luca_b", "Luca", "Bianchi", "3471122334", "luca.bianchi@outlook.com", "mysecret2026");
         Utente utenteCinque = new Utente("giulia_n", "Giulia", "Neri", "3285566778", "giulia.neri@yahoo.com", "pass9876");
 
-//        utenteService.save(utenteUno);
-//        utenteService.save(utenteDue);
-//        utenteService.save(utenteTre);
-//        utenteService.save(utenteQuattro);
-//        utenteService.save(utenteCinque);
+        utenteUno = utenteService.save(utenteUno);
+        utenteDue = utenteService.save(utenteDue);
+        utenteTre = utenteService.save(utenteTre);
+        utenteQuattro = utenteService.save(utenteQuattro);
+        utenteCinque = utenteService.save(utenteCinque);
+
 
         //POSTAZIONI
-        Postazione postazioneUno = new Postazione("Porta-27", TipoPostazione.OPENSPACE,120, edificioUno);
+        Postazione postazioneUno = new Postazione("Porta-27", TipoPostazione.OPENSPACE, 120, edificioUno);
         Postazione postazioneDue = new Postazione("Sala-A-Milano", TipoPostazione.SALA_RIUNIONI, 15, edificioDue);
         Postazione postazioneTre = new Postazione("Desk-Torino-04", TipoPostazione.PRIVATO, 1, edificioTre);
         Postazione postazioneQuattro = new Postazione("Open-Napoli-22", TipoPostazione.OPENSPACE, 50, edificioQuattro);
         Postazione postazioneCinque = new Postazione("Sala-Bologna-Executive", TipoPostazione.SALA_RIUNIONI, 8, edificioCinque);
 
-        postazioneService.save(postazioneUno);
-        postazioneService.save(postazioneDue);
-        postazioneService.save(postazioneTre);
-        postazioneService.save(postazioneQuattro);
-        postazioneService.save(postazioneCinque);
+        postazioneUno = postazioneService.save(postazioneUno);
+        postazioneDue = postazioneService.save(postazioneDue);
+        postazioneTre = postazioneService.save(postazioneTre);
+        postazioneQuattro = postazioneService.save(postazioneQuattro);
+        postazioneCinque = postazioneService.save(postazioneCinque);
 
-        // PRENOTAZIONI
+
+        //PRENOTAZIONI
 
         try {
             Prenotazione prenotazioneUno = prenotazioneService.disponibilitaPrenotazione(utenteUno, postazioneUno, LocalDate.of(2026, 11, 3));
             System.out.println("Prenotazione confermata. ID: " + prenotazioneUno.getPrenotazione_id());
+
             Prenotazione prenotazioneDue = prenotazioneService.disponibilitaPrenotazione(utenteDue, postazioneDue, LocalDate.of(2027, 1, 14));
-            System.out.println("Prenotazione confermata. ID: " + prenotazioneUno.getPrenotazione_id());
+            System.out.println("Prenotazione confermata. ID: " + prenotazioneDue.getPrenotazione_id());
+
             Prenotazione prenotazioneTre = prenotazioneService.disponibilitaPrenotazione(utenteTre, postazioneTre, LocalDate.of(2028, 12, 12));
-            System.out.println("Prenotazione confermata. ID: " + prenotazioneUno.getPrenotazione_id());
-            Prenotazione prenotazioneQuattro = prenotazioneService.disponibilitaPrenotazione(utenteQuattro, postazioneQuattro,LocalDate.of(2026, 2, 27));
-            System.out.println("Prenotazione confermata. ID: " + prenotazioneUno.getPrenotazione_id());
+            System.out.println("Prenotazione confermata. ID: " + prenotazioneTre.getPrenotazione_id());
+
+            Prenotazione prenotazioneQuattro = prenotazioneService.disponibilitaPrenotazione(utenteQuattro, postazioneQuattro, LocalDate.of(2026, 2, 27));
+            System.out.println("Prenotazione confermata. ID: " + prenotazioneQuattro.getPrenotazione_id());
+
             Prenotazione prenotazioneCinque = prenotazioneService.disponibilitaPrenotazione(utenteCinque, postazioneCinque, LocalDate.of(2029, 5, 10));
-            System.out.println("Prenotazione confermata. ID: " + prenotazioneUno.getPrenotazione_id());
+            System.out.println("Prenotazione confermata. ID: " + prenotazioneCinque.getPrenotazione_id());
         } catch (NotAvailabilityEx e) {
-            System.out.println("Prenotazione non caricata : " + e.getMessage());
+            System.out.println("Prenotazione non caricata: " + e.getMessage());
         }
 
+        System.out.println("Database popolato con successo.");
 
-        System.out.println("Database popolato");
 
-        //TEST CON POSTAZIONE OCCUPATA
-
+        // TEST CON POSTAZIONE OCCUPATA
         try {
             prenotazioneService.disponibilitaPrenotazione(utenteDue, postazioneUno, LocalDate.of(2026, 11, 3));
             System.out.println("Doppia prenotazione sulla stessa postazione");
         } catch (NotAvailabilityEx e) {
-            System.out.println("Err gestito : " + e.getMessage());
+            System.out.println("Errore gestito correttamente : " + e.getMessage());
         }
 
-        //TEST UTENTE OCCUPATO
-
+        // TEST UTENTE OCCUPATO
         try {
             prenotazioneService.disponibilitaPrenotazione(utenteUno, postazioneDue, LocalDate.of(2026, 11, 3));
-            System.out.println("Doppia prenotazione per utente nello stesso giorno");
+            System.out.println("Doppia prenotazione per lo stesso utente.");
         } catch (NotAvailabilityEx e) {
-            System.out.println("Err gestito : " + e.getMessage());
+            System.out.println("Errore gestito correttamente : " + e.getMessage());
         }
 
-
-        // TEST ID
+        // TEST ID EDIFICIO
         try {
-            Edificio trovato = edificioService.findById(edificioQuattro.getEdificio_id());
-            System.out.println("Edificio " + trovato.getName() + " trovato con successo.");
+            Edificio edificio = edificioService.findById(edificioQuattro.getEdificio_id());
+            System.out.println("Edificio " + edificio.getName() + " trovato con successo.");
         } catch (NotFoundException e) {
-            System.out.println("Errore nella ricerca.");
+            System.out.println("Errore nella ricerca dell'edificio.");
         }
 
-        //TEST CU POSTAZIONE
+        // TEST CODICE UNIVOCO POSTAZIONE
         try {
-            Postazione postazioneTrovata = postazioneService.findByCodiceUnivoco("blablabla");
-            System.out.println("Postazione trovata");
+            Postazione postazioneTrovata = postazioneService.findByCodiceUnivoco(postazioneUno.getCodiceUnivoco());
+            System.out.println("Postazione con codice '" + postazioneTrovata.getCodiceUnivoco() + "' trovata.");
         } catch (NotFoundException e) {
-            System.out.println("Errore nella ricerca codice univoco.");
+            System.out.println("Errore nella ricerca codice univoco della postazione.");
         }
     }
 }

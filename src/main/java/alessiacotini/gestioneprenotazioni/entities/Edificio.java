@@ -12,7 +12,7 @@ import java.util.UUID;
 @ToString
 public class Edificio {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.UUID)
     @Setter(AccessLevel.NONE)
     private UUID edificio_id;
 

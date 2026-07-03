@@ -20,10 +20,10 @@ public class PrenotazioneService {
 
     //DISPONIBILITA' PRENOTAZIONE con utente e postazione liberi in quella data
     public Prenotazione disponibilitaPrenotazione(Utente utente, Postazione postazione, LocalDate data){
-        if (prenotazioneRepository.existsByPostazioneAndData(postazione, data)) {
+        if (prenotazioneRepository.isPostazioneOccupata(postazione, data)) {
             throw new NotAvailabilityEx("La postazione selezionata è già occupata per quella data.");
         }
-        if (prenotazioneRepository.existsByUtenteAndData(utente, data)) {
+        if (prenotazioneRepository.isUtenteOccupato(utente, data)) {
             throw new NotAvailabilityEx("L'utente ha già un'altra prenotazione per questa data.");
         }
         Prenotazione prenotazione = new Prenotazione();
