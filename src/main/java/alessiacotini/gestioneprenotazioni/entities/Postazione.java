@@ -1,6 +1,5 @@
 package alessiacotini.gestioneprenotazioni.entities;
 
-import alessiacotini.gestioneprenotazioni.enums.StatoPostazione;
 import alessiacotini.gestioneprenotazioni.enums.TipoPostazione;
 import jakarta.persistence.*;
 import lombok.*;
@@ -21,10 +20,6 @@ public class Postazione {
     @Column(name="codice_univoco",unique = true, nullable = false)
     private String codiceUnivoco;
 
-    @Column(name= "stato_postazione")
-    @Enumerated(EnumType.STRING)
-    private StatoPostazione statoPostazione;
-
     @Column(name = "descrizione_postazione")
     private String descrizionePostazione;
 
@@ -39,8 +34,7 @@ public class Postazione {
     @JoinColumn(name = "edificio_id", nullable = false)
     private Edificio edificio;
 
-    public Postazione(StatoPostazione statoPostazione, String descrizionePostazione, TipoPostazione tipoPostazione, int numeroMassimo, Edificio edificio) {
-        this.statoPostazione = statoPostazione;
+    public Postazione(String descrizionePostazione, TipoPostazione tipoPostazione, int numeroMassimo, Edificio edificio) {
         this.descrizionePostazione = descrizionePostazione;
         this.tipoPostazione = tipoPostazione;
         this.numeroMassimo = numeroMassimo;
