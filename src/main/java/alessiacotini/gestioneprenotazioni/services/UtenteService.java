@@ -1,5 +1,6 @@
 package alessiacotini.gestioneprenotazioni.services;
 
+import alessiacotini.gestioneprenotazioni.entities.Edificio;
 import alessiacotini.gestioneprenotazioni.entities.Utente;
 import alessiacotini.gestioneprenotazioni.exception.NotAvailabilityEx;
 import alessiacotini.gestioneprenotazioni.exception.NotFoundException;
@@ -24,14 +25,9 @@ public class UtenteService {
     }
 
     //CERCO PER ID
-    public Optional<Utente> findById (UUID utente_id){
-        try {
-            return utenteRepository.findById(utente_id);
-        } catch (NotFoundException e) {
-            throw new NotFoundException("La ricerca non ha prodotto risultati");
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+    public Utente findById(UUID utente_id) {
+        return utenteRepository.findById(utente_id)
+                .orElseThrow(() -> new NotFoundException("Edificio con ID : " + utente_id + " non trovato."));
     }
 
     // CERCO TUTTI

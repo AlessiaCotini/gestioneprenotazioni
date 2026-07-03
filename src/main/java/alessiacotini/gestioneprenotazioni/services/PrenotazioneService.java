@@ -1,13 +1,16 @@
 package alessiacotini.gestioneprenotazioni.services;
 
+import alessiacotini.gestioneprenotazioni.entities.Edificio;
 import alessiacotini.gestioneprenotazioni.entities.Postazione;
 import alessiacotini.gestioneprenotazioni.entities.Prenotazione;
 import alessiacotini.gestioneprenotazioni.entities.Utente;
 import alessiacotini.gestioneprenotazioni.exception.NotAvailabilityEx;
+import alessiacotini.gestioneprenotazioni.exception.NotFoundException;
 import alessiacotini.gestioneprenotazioni.repositories.PrenotazioneRepository;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.UUID;
 
 @Service
 public class PrenotazioneService {
@@ -32,6 +35,12 @@ public class PrenotazioneService {
         prenotazione.setUtente(utente);
 
         return prenotazioneRepository.save(prenotazione);
+    }
+
+    //CERCO PER ID
+    public Prenotazione findById(UUID prenotazioneId) {
+        return prenotazioneRepository.findById(prenotazioneId)
+                .orElseThrow(() -> new NotFoundException("Edificio con ID : " + prenotazioneId + " non trovato."));
     }
 }
 
