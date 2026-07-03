@@ -16,6 +16,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.UUID;
 
 @Component
@@ -156,6 +157,21 @@ public class Runner implements CommandLineRunner {
         //UTENTE: SALVO - CERCO PER ID - CERCO PER NOME - CERCO PER PARTE DEL NOME - CERCO TUTTI
         //save(Utente utente) - findById (UUID utente_id) - findAllUsers() - findByName (String name) - findByNameContainingIgnoreCase (String contenuto_nome)
 
+        //CERCO UTENTE PER PARTE DEL NOME
+        try {
+            List<Utente> cercati = utenteService.findByNameContainingIgnoreCase("R");
+            System.out.println("Gli utenti trovati sono : "+ cercati);
+        }catch (NotFoundException e) {
+            throw new NotFoundException("Non ci sono utenti corrispondenti ai risultati di ricerca.");
+        }
+
+        //TEST CERCA TUTTI
+        try{
+            List<Edificio> edifici = edificioService.findAllEd();
+            System.out.println("Gli edifici trovati sono : " + edifici);
+        } catch (NotFoundException e) {
+            throw new NotFoundException("Non ci sono Edifici caricati.");
+        }
 
         // TEST CON POSTAZIONE OCCUPATA
         try {
