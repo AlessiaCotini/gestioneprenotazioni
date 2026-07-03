@@ -152,7 +152,7 @@ public class Runner implements CommandLineRunner {
 
         //PRENOTAZIONE: DISPONIBILITA' PRENOTAZIONE - CERCO PER ID
         //disponibilitaPrenotazione(Utente utente, Postazione postazione, LocalDate data)
-        
+
         //UTENTE: SALVO - CERCO PER ID - CERCO PER NOME - CERCO PER PARTE DEL NOME - CERCO TUTTI
         //save(Utente utente) - findById (UUID utente_id) - findAllUsers() - findByName (String name) - findByNameContainingIgnoreCase (String contenuto_nome)
 
