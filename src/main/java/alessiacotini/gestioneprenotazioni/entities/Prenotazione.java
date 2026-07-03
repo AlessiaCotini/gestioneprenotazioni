@@ -17,9 +17,6 @@ public class Prenotazione {
     @Setter(AccessLevel.NONE)
     private UUID prenotazione_id;
 
-    @Column(name = "nome")
-    private String name;
-
     @Column(name = "data_prenotazione")
     private LocalDate data;
 
@@ -30,4 +27,10 @@ public class Prenotazione {
     @ManyToOne
     @JoinColumn(name = "utente_id", nullable = false)
     private Utente utente_associato;
+
+    public Prenotazione(LocalDate data, Postazione postazione_associata, Utente utente_associato) {
+        this.data = data;
+        this.postazione_associata = postazione_associata;
+        this.utente_associato = utente_associato;
+    }
 }

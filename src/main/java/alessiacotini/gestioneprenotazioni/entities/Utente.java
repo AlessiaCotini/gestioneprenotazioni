@@ -30,4 +30,12 @@ public class Utente {
     @Column(name = "password")
     private String password;
 
+    public Utente(String username, String name, String surname, String numeroTelefono, String email, String password) {
+        this.username = username;
+        this.name = name;
+        this.surname = surname;
+        this.numeroTelefono = numeroTelefono;
+        this.email = email;
+        this.password = password;
+    }
 }

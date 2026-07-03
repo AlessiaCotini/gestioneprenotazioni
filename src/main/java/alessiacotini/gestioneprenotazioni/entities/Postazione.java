@@ -39,4 +39,18 @@ public class Postazione {
     @JoinColumn(name = "edificio_id", nullable = false)
     private Edificio edificio;
 
+    public Postazione(StatoPostazione statoPostazione, String descrizionePostazione, TipoPostazione tipoPostazione, int numeroMassimo, Edificio edificio) {
+        this.statoPostazione = statoPostazione;
+        this.descrizionePostazione = descrizionePostazione;
+        this.tipoPostazione = tipoPostazione;
+        this.numeroMassimo = numeroMassimo;
+        this.edificio = edificio;
+        creoCodiceUnivoco();
+    }
+    @PrePersist
+    protected void creoCodiceUnivoco() {
+        if (this.codiceUnivoco == null) {
+            this.codiceUnivoco = UUID.randomUUID().toString();
+        }
+    }
 }

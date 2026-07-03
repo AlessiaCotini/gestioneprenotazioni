@@ -25,4 +25,9 @@ public class Edificio {
     @Column(name = "citta")
     private int citta;
 
+    public Edificio(String name, int price, int citta) {
+        this.name = name;
+        this.price = price;
+        this.citta = citta;
+    }
 }
