@@ -158,13 +158,11 @@ public class Runner implements CommandLineRunner {
         //save(Utente utente) - findById (UUID utente_id) - findAllUsers() - findByName (String name) - findByNameContainingIgnoreCase (String contenuto_nome)
 
         //CERCO PER POSIZIONE E TIPO
-        try{
-            List<Postazione> cercate = postazioneService.findAllPos("Roma", TipoPostazione.PRIVATO);
-            System.out.println("Le postazioni che corrispondono ai risultati di ricerca sono : "+ cercate);
-        }catch (NotFoundException e )
-        {throw new NotFoundException("La ricerca non ha prodotto risultati");}
-         catch (Exception e) {
-            throw new RuntimeException(e);
+        try {
+            List<Postazione> risultati = postazioneService.findAllPos("Milano", TipoPostazione.PRIVATO);
+            System.out.println("La ricerca ha prodotto i seguenti risultati : " + risultati);
+        } catch (NotFoundException e) {
+            System.err.println("La ricerca non ha prodotto risultati : " + e.getMessage());
         }
 
         //CERCO UTENTE PER PARTE DEL NOME
@@ -188,7 +186,7 @@ public class Runner implements CommandLineRunner {
             prenotazioneService.disponibilitaPrenotazione(utenteDue, postazioneUno, LocalDate.of(2026, 11, 3));
             System.out.println("Doppia prenotazione sulla stessa postazione");
         } catch (NotAvailabilityEx e) {
-            System.out.println("Errore gestito correttamente : " + e.getMessage());
+            System.err.println("Errore gestito correttamente : " + e.getMessage());
         }
 
         // TEST UTENTE OCCUPATO
@@ -204,7 +202,7 @@ public class Runner implements CommandLineRunner {
             Edificio edificio = edificioService.findById(edificioQuattro.getEdificio_id());
             System.out.println("Edificio " + edificio.getName() + " trovato con successo.");
         } catch (NotFoundException e) {
-            System.out.println("Errore nella ricerca dell'edificio.");
+            System.err.println("Errore nella ricerca dell'edificio.");
         }
 
         // TEST CODICE UNIVOCO POSTAZIONE
@@ -212,7 +210,7 @@ public class Runner implements CommandLineRunner {
             Postazione postazioneTrovata = postazioneService.findByCodiceUnivoco(postazioneUno.getCodiceUnivoco());
             System.out.println("Postazione con codice '" + postazioneTrovata.getCodiceUnivoco() + "' trovata.");
         } catch (NotFoundException e) {
-            System.out.println("Errore nella ricerca codice univoco della postazione.");
+            System.err.println("Errore nella ricerca codice univoco della postazione.");
         }
     }
 }

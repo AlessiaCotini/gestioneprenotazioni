@@ -34,7 +34,7 @@ public class PostazioneService {
     // CERCO TUTTE LE POSTAZIONI PER CITTÀ E TIPO
     public List<Postazione> findAllPos(String citta, TipoPostazione tipoPostazione) {
         try {
-            List<Postazione> postazioni = postazioneRepository.findByCittaAndTipoPostazione(citta, tipoPostazione);
+            List<Postazione> postazioni = postazioneRepository.cercaPerCittaETipo(citta, tipoPostazione);
             if (postazioni.isEmpty()) {
                 throw new NotFoundException("Nessuna postazione trovata a " + citta + " di tipo " + tipoPostazione);
             }
