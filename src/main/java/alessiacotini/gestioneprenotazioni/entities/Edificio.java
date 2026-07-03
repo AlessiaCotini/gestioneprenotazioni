@@ -20,14 +20,14 @@ public class Edificio {
     private String name;
 
     @Column(name= "indirizzo")
-    private int price;
+    private String indirizzo;
 
     @Column(name = "citta")
-    private int citta;
+    private String citta;
 
-    public Edificio(String name, int price, int citta) {
+    public Edificio(String name, String indirizzo, String citta) {
         this.name = name;
-        this.price = price;
+        this.indirizzo = indirizzo;
         this.citta = citta;
     }
 }

@@ -22,15 +22,15 @@ public class Prenotazione {
 
     @ManyToOne
     @JoinColumn(name = "postazione_id", nullable = false)
-    private Postazione postazione_associata;
+    private Postazione postazione;
 
     @ManyToOne
     @JoinColumn(name = "utente_id", nullable = false)
-    private Utente utente_associato;
+    private Utente utente;
 
-    public Prenotazione(LocalDate data, Postazione postazione_associata, Utente utente_associato) {
+    public Prenotazione(LocalDate data, Postazione postazione, Utente utente) {
         this.data = data;
-        this.postazione_associata = postazione_associata;
-        this.utente_associato = utente_associato;
+        this.postazione = postazione;
+        this.utente = utente;
     }
 }

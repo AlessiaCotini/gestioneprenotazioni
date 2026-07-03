@@ -12,7 +12,10 @@ import java.util.UUID;
 @ToString
 public class Utente {
     @Id
-    @Column(name = "utente_id", unique = true)
+    @Column(name = "utente_id")
+    private UUID utente_id;
+
+    @Column(name = "username", unique = true)
     private String username;
 
     @Column(name = "nome")
