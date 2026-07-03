@@ -149,13 +149,23 @@ public class Runner implements CommandLineRunner {
         //save(Edificio edificio) - findById(UUID edificioId) - findAllEd()
 
         //POSTAZIONE: SALVO - CERCO PER CODICE UNIVOCO - CERCO TUTTI
-        //save(Postazione postazione) - findByCodiceUnivoco (String codiceUnivoco) - findAllPos()
+        //save(Postazione postazione) - findByCodiceUnivoco (String codiceUnivoco) - findAllPos(String citta, TipoPostazione tipoPostazione)
 
         //PRENOTAZIONE: DISPONIBILITA' PRENOTAZIONE - CERCO PER ID
         //disponibilitaPrenotazione(Utente utente, Postazione postazione, LocalDate data)
 
         //UTENTE: SALVO - CERCO PER ID - CERCO PER NOME - CERCO PER PARTE DEL NOME - CERCO TUTTI
         //save(Utente utente) - findById (UUID utente_id) - findAllUsers() - findByName (String name) - findByNameContainingIgnoreCase (String contenuto_nome)
+
+        //CERCO PER POSIZIONE E TIPO
+        try{
+            List<Postazione> cercate = postazioneService.findAllPos("Roma", TipoPostazione.PRIVATO);
+            System.out.println("Le postazioni che corrispondono ai risultati di ricerca sono : "+ cercate);
+        }catch (NotFoundException e )
+        {throw new NotFoundException("La ricerca non ha prodotto risultati");}
+         catch (Exception e) {
+            throw new RuntimeException(e);
+        }
 
         //CERCO UTENTE PER PARTE DEL NOME
         try {

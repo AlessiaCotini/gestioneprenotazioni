@@ -19,5 +19,7 @@ public interface PrenotazioneRepository extends JpaRepository<Prenotazione , UUI
 
     @Query("SELECT COUNT(p) > 0 FROM Prenotazione p WHERE p.utente = :utente AND p.data = :data")
     boolean isUtenteOccupato(@Param("utente") Utente utente, @Param("data") LocalDate data);
+
+
 }
 
